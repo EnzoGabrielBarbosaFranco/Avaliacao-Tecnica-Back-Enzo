@@ -10,7 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,4 +24,10 @@ public class Dependente {
     private String nome;
     @Column(nullable = false)
     private int idade;
+
+    public void excluir() {
+        this.id = 0;
+        this.nome = null;
+        this.idade = 0;
+    }
 }
