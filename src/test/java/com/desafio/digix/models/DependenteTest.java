@@ -2,14 +2,12 @@ package com.desafio.digix.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 public class DependenteTest {
     @Test
     public void deve_criar_um_dependente() {
-        // Cria um objeto Dependente para teste
+        // Cria um objeto Dependente para o teste
         String nome = "Enzo";
         int idade = 17;
         Dependente dependente = Dependente.builder().nome(nome).idade(idade).build();
@@ -21,7 +19,7 @@ public class DependenteTest {
 
     @Test
     public void deve_excluir_um_dependente() {
-        // Cria um objeto Dependente para teste
+        // Cria um objeto Dependente para o teste
         String nome = "Enzo";
         int idade = 17;
         Dependente dependente =  Dependente.builder().nome(nome).idade(idade).build();
@@ -37,7 +35,7 @@ public class DependenteTest {
 
     @Test
     public void deve_atualizar_dados_de_um_dependente() {
-        // Cria um objeto Dependente para teste
+        // Cria um objeto Dependente para o teste
         long id = 1;
         String nome = "Enzo";
         int idade = 17;
@@ -56,8 +54,8 @@ public class DependenteTest {
     }
 
     @Test
-    public void deve_filtrar_dependentes_com_menos_de_18_anos_de_idade() {
-        // Cria uma lista de Dependentes para teste
+    public void deve_filtrar_apenas_dependentes_com_menos_de_18_anos_de_idade() {
+        // Cria uma lista de Dependentes para o teste
         List<Dependente> dependentes = new ArrayList<>();
         dependentes.add(Dependente.builder().id(1).nome("Enzo").idade(20).build());
         dependentes.add(Dependente.builder().id(2).nome("Gabriel").idade(17).build());

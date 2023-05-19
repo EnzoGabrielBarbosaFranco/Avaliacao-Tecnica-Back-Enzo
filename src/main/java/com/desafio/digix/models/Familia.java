@@ -26,4 +26,11 @@ public class Familia {
     private double renda;
     @Column(nullable = false)
     private String nomeResponsavel;
+
+    public void excluir() {
+        this.id = 0;
+        this.nomeResponsavel = null;
+        this.quantidadeDependentes = 0;
+        this.renda = 0;
+    }
 }
