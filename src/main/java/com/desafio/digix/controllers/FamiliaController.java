@@ -2,7 +2,6 @@ package com.desafio.digix.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.desafio.digix.models.Familia;
 import com.desafio.digix.repository.FamiliaRepository;
 
@@ -26,9 +24,9 @@ public class FamiliaController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Familia>> buscarTodos() {
         Iterable<Familia> iterable = familiaRepository.findAll();
-        List<Familia> refeitorios = new ArrayList<>();
-        iterable.forEach(refeitorios::add);
-        return ResponseEntity.ok().body(refeitorios);
+        List<Familia> familias = new ArrayList<>();
+        iterable.forEach(familias::add);
+        return ResponseEntity.ok().body(familias);
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Familia> criar(@RequestBody Familia familia) {

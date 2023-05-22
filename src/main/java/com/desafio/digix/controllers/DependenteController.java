@@ -2,7 +2,6 @@ package com.desafio.digix.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.desafio.digix.models.Dependente;
 import com.desafio.digix.repository.DependenteRepository;
 
@@ -26,9 +24,9 @@ public class DependenteController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Dependente>> buscarTodos() {
         Iterable<Dependente> iterable = dependenteRepository.findAll();
-        List<Dependente> refeitorios = new ArrayList<>();
-        iterable.forEach(refeitorios::add);
-        return ResponseEntity.ok().body(refeitorios);
+        List<Dependente> dependentes = new ArrayList<>();
+        iterable.forEach(dependentes::add);
+        return ResponseEntity.ok().body(dependentes);
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Dependente> criar(@RequestBody Dependente dependente) {
