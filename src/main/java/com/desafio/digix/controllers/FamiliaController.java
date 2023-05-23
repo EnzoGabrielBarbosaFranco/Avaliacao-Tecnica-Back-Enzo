@@ -2,6 +2,8 @@ package com.desafio.digix.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desafio.digix.models.Familia;
+import com.desafio.digix.models.PontuacaoFamilia;
 import com.desafio.digix.repository.FamiliaRepository;
+import com.desafio.digix.services.PontuacaoService;
 
 @RestController
-@RequestMapping(path = {"/api/v1/familias"}, produces = {"application/json"})
+@RequestMapping(path = { "/api/v1/familias" }, produces = { "application/json" })
 public class FamiliaController {
-    private final FamiliaRepository familiaRepository;
+    @Autowired
+    private FamiliaRepository familiaRepository;
+    @Autowired
+    private PontuacaoService pontuacaoService;
 
     public FamiliaController(FamiliaRepository familiaRepository) {
         this.familiaRepository = familiaRepository;
@@ -27,6 +34,11 @@ public class FamiliaController {
         List<Familia> familias = new ArrayList<>();
         iterable.forEach(familias::add);
         return ResponseEntity.ok().body(familias);
+    }
+    @GetMapping("/familiasRankeadas")
+    public ResponseEntity<List<PontuacaoFamilia>> obterPontuacoesOrdenadas() {
+        List<PontuacaoFamilia> pontuacoesOrdenadas = pontuacaoService.obterPontuacoesOrdenadas();
+        return ResponseEntity.ok(pontuacoesOrdenadas);
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Familia> criar(@RequestBody Familia familia) {
