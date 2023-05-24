@@ -2,9 +2,7 @@ package com.desafio.digix.controllers;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,14 +28,25 @@ public class FamiliaController {
     public FamiliaController(FamiliaRepository familiaRepository) {
         this.familiaRepository = familiaRepository;
     }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Familia>> buscarTodos() {
         Iterable<Familia> iterable = familiaRepository.findAll();
         List<Familia> familias = new ArrayList<>();
         iterable.forEach(familias::add);
-        Collections.sort(familias, Comparator.comparingInt(Familia::getPontuacao).reversed());
+    
+        // Ordenar a lista de famílias com base nos pontos (ordem decrescente) e renda (ordem crescente em caso de empate nos pontos)
+        Collections.sort(familias, (f1, f2) -> {
+            if (f1.getPontuacao() != f2.getPontuacao()) {
+                return Integer.compare(f2.getPontuacao(), f1.getPontuacao()); // Ordenar por pontos (decrescente)
+            } else {
+                return Double.compare(f1.getRendaTotal(), f2.getRendaTotal()); // Ordenar por renda (crescente)
+            }
+        });
+    
         return ResponseEntity.ok().body(familias);
     }
+
     @GetMapping("/familiasRankeadas")
     public ResponseEntity<List<PontuacaoFamilia>> obterPontuacoesOrdenadas() {
         List<PontuacaoFamilia> pontuacoesOrdenadas = pontuacaoService.obterPontuacoesOrdenadas();
