@@ -1,6 +1,8 @@
 package com.desafio.digix.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ public class FamiliaController {
         Iterable<Familia> iterable = familiaRepository.findAll();
         List<Familia> familias = new ArrayList<>();
         iterable.forEach(familias::add);
+        Collections.sort(familias, Comparator.comparingInt(Familia::getPontuacao).reversed());
         return ResponseEntity.ok().body(familias);
     }
     @GetMapping("/familiasRankeadas")

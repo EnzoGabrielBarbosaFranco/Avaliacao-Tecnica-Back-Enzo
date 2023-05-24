@@ -8,51 +8,50 @@ public class FamiliaTest {
     public void deve_criar_uma_familia() {
         // Cria um objeto Familia para o teste
         String nomeResponsavel = "Enzo";
-        int quantidadeDependentes = 1;
-        double renda = 900;
+        int numeroDependentes = 1;
+        double rendaTotal = 900;
 
-        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).quantidadeDependentes(quantidadeDependentes).renda(renda).build();
+        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).numeroDependentes(numeroDependentes).rendaTotal(rendaTotal).build();
 
         // Verifica se o objeto foi criado corretamente
         Assertions.assertEquals(nomeResponsavel, familia.getNomeResponsavel());
-        Assertions.assertEquals(quantidadeDependentes, familia.getQuantidadeDependentes());
-        Assertions.assertEquals(renda, familia.getRenda());
+        Assertions.assertEquals(numeroDependentes, familia.getNumeroDependentes());
+        Assertions.assertEquals(rendaTotal, familia.getRendaTotal());
     }
 
     @Test
     public void deve_excluir_uma_familia() {
         // Cria um objeto Familia para o teste
         String nomeResponsavel = "Enzo";
-        int quantidadeDependentes = 1;
-        double renda = 900;
-        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).quantidadeDependentes(quantidadeDependentes).renda(renda).build();
+        int numeroDependentes = 1;
+        double rendaTotal = 900;
+        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).numeroDependentes(numeroDependentes).rendaTotal(rendaTotal).build();
 
         // Chama o método de exclusão
         familia.excluir();
 
         // Verifica se o objeto foi excluído corretamente
-        Assertions.assertEquals(0, familia.getQuantidadeDependentes());
+        Assertions.assertEquals(0, familia.getNumeroDependentes());
         Assertions.assertNull(familia.getNomeResponsavel());
-        Assertions.assertEquals(0, familia.getRenda());
+        Assertions.assertEquals(0, familia.getRendaTotal());
     }
 
     @Test
     public void deve_atualizar_dados_de_uma_familia() {
         // Cria um objeto Familia para o teste
         String nomeResponsavel = "Enzo";
-        int quantidadeDependentes = 1;
-        double renda = 900;
-        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).quantidadeDependentes(quantidadeDependentes).renda(renda).build();
+        int numeroDependentes = 1;
+        double rendaTotal = 900;
+        Familia familia = Familia.builder().nomeResponsavel(nomeResponsavel).numeroDependentes(numeroDependentes).rendaTotal(rendaTotal).build();
 
         // Realiza a atualização dos atributos
         String novoNomeResponsavel = "Gabriel Enzo";
-        double novaRenda = 850;
+        double novaRendaTotal = 850;
         familia.setNomeResponsavel(novoNomeResponsavel);
-        familia.setRenda(novaRenda);
+        familia.setRendaTotal(novaRendaTotal);
 
         // Verifica se os atributos foram atualizados corretamente
         Assertions.assertEquals(novoNomeResponsavel, familia.getNomeResponsavel());
-        Assertions.assertEquals(novaRenda, familia.getRenda());
+        Assertions.assertEquals(novaRendaTotal, familia.getRendaTotal());
     }
-
 }

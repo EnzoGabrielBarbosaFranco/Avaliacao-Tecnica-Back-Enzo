@@ -1,5 +1,8 @@
 package com.desafio.digix.models;
 
+import java.util.Arrays;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,17 +23,48 @@ public class Familia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
-    private int quantidadeDependentes;
-    @Column(nullable = false)
-    private double renda;
+    @Column()
+    private int numeroDependentes;
+    @Column()
+    private double rendaTotal;
     @Column(nullable = false)
     private String nomeResponsavel;
+
+    public int getPontuacao() {
+        int pontuacao = 0;
+
+        if (rendaTotal <= 900) {
+            pontuacao += 5;
+        } else if (rendaTotal >= 901 && rendaTotal <= 1500) {
+            pontuacao += 3;
+        }
+
+        int numeroDependentesValidos = numeroDependentes - contarDependentesMenoresDe18Anos();
+
+        if (numeroDependentesValidos >= 3) {
+            pontuacao += 3;
+        } else if (numeroDependentesValidos >= 1 && numeroDependentesValidos <= 2) {
+            pontuacao += 2;
+        }
+
+        return pontuacao;
+    }
+
+    private int contarDependentesMenoresDe18Anos() {
+        List<Integer> idadesDependentes = Arrays.asList(16, 20, 14, 25, 17);
+
+        int contador = 0;
+        for (int idade : idadesDependentes) {
+            if (idade < 18) {
+            }
+        }
+        return contador;
+    }
 
     public void excluir() {
         this.id = 0;
         this.nomeResponsavel = null;
-        this.quantidadeDependentes = 0;
-        this.renda = 0;
+        this.numeroDependentes = 0;
+        this.rendaTotal = 0;
     }
 }
